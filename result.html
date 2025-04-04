@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="result">
+
+<div class="navbar">
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+    <a href="/quiz">Quiz</a>
+    <a href="{{ url_for('quiz') }}" class="try-again">Try Again</a>
+</div>
+
+<div class="container">
+    <h1>Quiz Completed!</h1>
+    <p class="score-display">Your Score: <strong>{{ score }} / {{ total }}</strong></p>
+
+    <h2>Review Your Answers:</h2>
+    <table class="result-table">
+        <tr>
+            <th>Question</th>
+            <th>Your Answer</th>
+            <th>Correct Answer</th>
+            <th>Result</th>
+        </tr>
+        {% for q_id, question_text, correct_answer in questions %}
+        <tr>
+            <td>{{ question_text }}</td>
+            <td>{{ user_answers[q_id] }}</td>
+            <td>{{ correct_answers[q_id] }}</td>
+            <td>
+                {% if user_answers[q_id] == correct_answers[q_id] %}
+                    <span class="correct">✔ Correct</span>
+                {% else %}
+                    <span class="wrong">✘ Incorrect</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded"), function() {
+
+        document.querySelectorAll(".navbar a").forEach(link => {
+            link.addEventListener("click", function(event) {
+            event.stopPropagation(); 
+            });
+        });
+
+        document.querySelector(".try-again-nav").addEventListener("click", function(event) {
+            event.preventDefault(); 
+            window.location.href = "{{ url_for('quiz') }}"; 
+        });
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About the Quiz App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="about">
+
+<div class="navbar">
+    <a href="{{ url_for('home') }}" class="{% if request.path == '/' %}active{% endif %}">Home</a>
+    <a href="{{ url_for('about') }}" class="{% if request.path == '/about' %}active{% endif %}">About</a>
+    <a href="{{ url_for('quiz') }}" class="{% if request.path == '/quiz' %}active{% endif %}">Quiz</a>
+</div>
+
+
+<div class="container">
+    <h1>About the Quiz App</h1>
+    <p class="about-text">
+        Welcome to the **Online Quiz Platform**, a place where you can challenge yourself 
+        and improve your knowledge in various subjects. Our quizzes are designed to be fun, 
+        interactive, and educational.
+    </p>
+
+    <p class="about-text">
+        Whether you want to test your general knowledge or prepare for an exam, 
+        this platform provides a great way to learn while having fun. Start your journey today!
+    </p>
+
+    <a href="/quiz" class="start-btn">Start Quiz</a>
+</div>
+
+</body>
+</html>

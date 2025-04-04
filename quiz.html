@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Take the Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="quiz">
+
+<div class="navbar">
+    <a href="{{ url_for('home') }}" class="{% if request.path == '/' %}active{% endif %}">Home</a>
+    <a href="{{ url_for('about') }}" class="{% if request.path == '/about' %}active{% endif %}">About</a>
+    <a href="{{ url_for('quiz') }}" class="{% if request.path == '/quiz' %}active{% endif %}">Quiz</a>
+</div>
+
+
+<div class="container">
+    <h1>Take the Quiz</h1>
+
+    <form action="/submit" method="POST" class="quiz-form">
+        {% for q in questions %}
+        <div class="question-block">
+            <p class="question">{{ loop.index }}. {{ q[1] }}</p>
+            <div class="options">
+                <label><input type="radio" name="q{{ q[0] }}" value="{{ q[2] }}"> <span>A) {{ q[2] }}</span></label>
+                <label><input type="radio" name="q{{ q[0] }}" value="{{ q[3] }}"> <span>B) {{ q[3] }}</span></label>
+                <label><input type="radio" name="q{{ q[0] }}" value="{{ q[4] }}"> <span>C) {{ q[4] }}</span></label>
+                <label><input type="radio" name="q{{ q[0] }}" value="{{ q[5] }}"> <span>D) {{ q[5] }}</span></label>
+            </div>          
+        </div>
+        {% endfor %}
+        <br><input type="submit" value="Submit" class="submit-btn">
+    </form>
+</div>
+
+</body>
+</html>
